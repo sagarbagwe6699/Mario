@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1550913000 source:e:\sagar\codeblocks\jump\main.cpp
+	<stdio.h>
+	<conio.h>
+	<graphics.h>
+	<windows.h>
+
