@@ -3,11 +3,15 @@
 #include <graphics.h>
 #include <windows.h>
 
+int isJumping=0;
+
 void dispBg(){
-    setfillstyle(1,9);
-    bar(0,0,1400,400);
+    readimagefile("./bg.jpg",0,0,1400,400);
+    //setfillstyle(1,9);
+    //bar(0,0,1400,400);
     setfillstyle(1,10);
     bar(0,400,1400,800);
+    readimagefile("./lives.jpg",50,600,350,740);
 }
 
 void jumper(int x1,int y1,int x2,int y2){
@@ -24,11 +28,11 @@ void obs(int x1,int y1,int x2,int y2){
 int main(){
     initwindow(1400,800,"Jumping");
     dispBg();
-    readimagefile("./stand.jpg",140,300,280,400);
+    readimagefile("./stand.jpg",140,300,260,400);
     while(1){
     for(int i=0;i<=1260;i=i+70){
             if(GetAsyncKeyState(VK_SPACE) && i/float(140)<=8.50 && i/float(140)>=7.00){
-
+                isJumping=1;
                 //Hide
                 setfillstyle(1,9);
                 bar(140,300,280,400);
@@ -48,12 +52,22 @@ int main(){
                 setfillstyle(1,9);
                 bar(200,300,300,400);
 
-                i=i+140;
+                i=i+150;
 
                 setfillstyle(1,9);
                 bar(140,100,280,200);
-            }
-        readimagefile("./stand.jpg",140,300,280,400);
+        }
+        if(isJumping==0 && i/70>=16)
+        {
+            readimagefile("./stand.jpg",140,300,260,400);
+            obs(1300-i+60,360,1360-i+60,400);
+            delay(5000);
+            cleardevice();
+            dispBg();
+            break;
+        }
+        isJumping=0;
+        readimagefile("./stand.jpg",140,300,260,400);
         //jumper(140,300,280,400);
         obs(1300-i,360,1360-i,400);
         delay(60);
